@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Care</title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+
+    
+
+
+        
+        .h-20{
+            height: 20rem;
+        }
+        .h-30{
+            height:30rem;
+        }
+
+        body{
+            background-image:url(https://png.pngtree.com/background/20210711/original/pngtree-summer-forest-minimalist-poster-background-picture-image_1099798.jpg);
+            background-size: cover;
+            background-repeat: repeat;
+            background-position: center;
+        }
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            font-size: 25px;
+        }
+        .rating > span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+        }
+        
+        
+        .custom-toggler .navbar-toggler-icon {
+            color: red; /* Change color here */
+        }
+        .text-gold{
+            color: gold;
+        }
+
+
+        .navbar-nav .nav-link {
+        transition: padding 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            padding: 8px 20px; /* Change the padding values to whatever you prefer */
+            background-color: rgba(32, 36, 43, 0.2); /* Change the background color to whatever you prefer */
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .health-facts {
+            font-size: 18px;
+            margin-top: 50px;
+            text-align: center;
+            color: #333; /* Darker text color */
+        }
+        .user-request {
+            font-size: 20px;
+            text-align: center;
+            color: #333; /* Darker text color */
+            margin-top: 50px;
+        }
+        .rating-explanation {
+            font-size: 16px;
+            text-align: center;
+            color: #333; /* Darker text color */
+            margin-top: 50px;
+        }
+
+
+
+
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            visibility: hidden;
+        }
+
+        /* CSS for visible effect */
+        .visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+
+        #animated-element {
+    animation: slideDown 0.5s ease-in-out;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+        
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    
+
+
+    
+    
+    
+   
+
+
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0, 0, 0, 0.2) 100%); padding: 5px 10px;">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand h1 text-white" style="font-size: 18px;">Health Care</a>
+            
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="color: white;"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav" style="font-size: 14px;">
+                    <li class="nav-item">
+                        <a href="/admin/login/" class="nav-link text-white">Admin Panel</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'patient_app:dashboard' %}" class="nav-link text-white">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'patient_app:data_entry' %}" class="nav-link text-white">Health Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:logout' %}" class="nav-link text-white">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:registration' %}" class="nav-link text-white">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:login' %}" class="nav-link text-white">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+       
+    
+    {% if user.is_authenticated %}
+    <div class="container text-white" id="animated-element">
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col">
+                <h1 class="text-center" style="font-size: 50px; font-style: oblique; border-radius: 50px; background-position: bottom; background-image: url(https://thumbs.dreamstime.com/b/faded-landscape-wild-bear-landscape-illustration-faded-landscape-tall-trees-wild-bear-passing-ai-297495204.jpg); color: #000;"><br><br><br>Hi,<br><b>{{ user.name }}</b><br><p style="font-size: 20px;">Scroll down&#8681; for insights<br><br></p></h1>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+    
+    
+
+   
+
+    <div class="container mt-3">
+        {% if data %}
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-white align-items-center">
+                    <div class="content-container animate-on-scroll">
+
+                    
+                        <span class="mr-2">
+                            <h5 style="text-align: center;color: #000 ;font-size: 40px; font-family:Georgia, 'Times New Roman', Times, serif;"><br><br>Your health Rating :</h5>
+                        </span>
+
+                        <div class="rating text-gold" style="text-align: center;padding-left: 380px;">
+                            {% if 0.5 == rating  %}
+                            <span style="font-size: 100px;">&#11243;</span>  <!--0.5--><!--half_star =  &#11242;   full_star = &#9733-->
+                            {% elif  1 ==  rating %}
+                            <span style="font-size: 100px;">&#9733;</span>   <!--1-->
+                            {% elif  1.5 ==  rating %}
+                            <span style="font-size: 100px;">&#11242;&#9733;</span>   <!--1.5-->
+                            {% elif  2 ==  rating %}
+                            <span style="font-size: 100px;">&#9733;&#9733;</span>   <!--2-->
+                            {% elif  2.5 ==  rating %}
+                            <span style="font-size: 100px;">&#11242;&#9733;&#9733;</span>   <!--2.5-->
+                            {% elif  3 ==  rating %}
+                            <span style="font-size: 100px;">&#9733;&#9733;&#9733;</span>   <!--3-->
+                            {% elif  3.5 ==  rating %}
+                            <span style="font-size: 100px;">&#11242;&#9733;&#9733;&#9733;</span>   <!--3.5-->
+                            {% elif  4 ==  rating %}
+                            <span style="font-size: 100px;">&#9733;&#9733;&#9733;&#9733;</span>   <!--4-->
+                            {% elif  4.5 ==  rating %}
+                            <span style="font-size: 100px;">&#11242;&#9733;&#9733;&#9733;&#9733;</span>   <!--4.5-->
+                            {% elif  5 ==  rating %}
+                            <span style="font-size: 100px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>   <!--5-->
+                            {% endif %}
+                        </div>
+                    </div>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                    
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+            
+
+            <div class="row justify-content-center align-items-center h-20">
+
+                    <p style="font-size: 25px; text-align: center; margin-top: 10px;"><b>Based on your heartbeat data, our analysis shows:</b></p>
+                
+                    <div class="col-md-6 col-sm-12"><canvas id="hbChart" class="h-100 w-100" ></canvas></div>
+                    <p style="font-size: 20px; text-align: center;"><b>To improve your heart health:</b></p>
+                    <ul style="font-size: 17px;text-align: center;">
+                        <li>Engage in regular aerobic exercise such as brisk walking, running, or cycling.</li>
+                        <li>Follow a heart-healthy diet rich in fruits, vegetables, whole grains, and lean proteins.</li>
+                        <li>Manage stress through relaxation techniques like meditation or yoga.<br><br></li>
+                    </ul>
+                    <p style="color: #336699; font-size: 18px; font-family: 'Arial', sans-serif; text-align: justify;padding-left: 200px; padding-right: 200px;">
+                        🌟 <strong>Heartbeat Harmony:</strong> Your heart is at the core of your vitality, beating the rhythm of life with every pulse! Celebrate the strength and steadiness of your heart. Keep this rhythm vibrant with activities that spark joy and health. We're here to cheer you on every step of the way. Let's keep the beat going together!<br><br><br><br><br><br><br><br>
+                    </p>
+                   
+
+                
+                <p style="font-size: 25px; text-align: center; margin-top: 10px;"><b>Based on your sleep time data, our analysis shows:</b></p>
+                <div class="col-md-6 col-sm-12"><canvas id="sleepChart"  class="h-100 w-100"></canvas></div>
+                <p style="font-size: 20px; text-align: center;"><b>To improve your sleep quality:</b></p>
+                <ul style="font-size: 17px;text-align: center; ">
+                    <li>Establish a consistent sleep schedule by going to bed and waking up at the same time every day, even on weekends.</li>
+                    <li>Create a relaxing bedtime routine to signal your body that it's time to sleep, such as reading a book or taking a warm bath.</li>
+                    <li>Avoid electronic devices and bright lights before bedtime as they can disrupt your sleep cycle.<br><br></li>
+                </ul>
+                <p style="color: #336699; font-size: 18px; font-family: 'Arial', sans-serif; text-align: justify;padding-left: 200px; padding-right: 200px;">
+                    🌙 <strong>Sleep Serenity:</strong> Dive into a sea of tranquility with each night's rest. Your dedication to nurturing your sleep pattern shines brightly, illuminating the path to well-being. Continue to embrace the night's embrace, and let's explore new heights of health and vitality. Your journey to serene nights and energized days is just beginning!<br><br><br><br><br><br><br><br>
+                </p>
+                
+
+
+
+
+
+                <p style="font-size: 25px; text-align: center; margin-top: 10px;"><b>Based on your weight data, our analysis shows:</b></p>
+                <div class="col-md-6 col-sm-12"><canvas id="weightChart"  class="h-100 w-100"></canvas></div>
+                <p style="font-size: 20px; text-align: center;"><b>To maintain a healthy weight:</b></p>
+
+                <ul style="font-size: 17px;text-align: center;">
+                    <li>Eat a balanced diet that includes a variety of nutrient-rich foods and limits processed foods high in added sugars, fats, and sodium.</li>
+                    <li>Engage in regular physical activity such as walking, jogging, or strength training to burn calories and build muscle mass.</li>
+                    <li>Monitor portion sizes and practice mindful eating to prevent overeating and promote weight loss or maintenance.<br><br></li>
+                </ul>
+                <p style="color: #336699; font-size: 18px; font-family: 'Arial', sans-serif; text-align: justify;padding-left: 200px; padding-right: 200px;">
+                    🏆 <strong>Weight Wisdom:</strong> Watching your weight journey unfold is like witnessing a masterpiece in progress. Every little change is a step towards your masterpiece of health. Remember, you're not walking this path alone; we're here to support and celebrate each milestone with you. Here's to many more successes and insights together!<br><br><br><br><br><br><br><br>
+                </p>
+
+                <p style="color: #ff9900; font-size: 20px; font-family: 'Arial', sans-serif; text-align: center; margin-top: 30px;">
+                    🌈 <strong>Ready for more vibrant health insights?</strong> Keep tracking, keep thriving, and let's make each day healthier than the last. Your health journey is our journey, and we can't wait to see where it takes you next. <strong>See you soon!</strong>
+                </p>
+            
+            
+            </div>
+            
+            </div>
+        {% else %}
+            <div class="row h-30 justify-content-center align-items-center">
+                <div class="col-md-6 h3">
+                    Patient health data not available.
+                </div>
+            </div>
+        {% endif %}
+        <script>
+
+            // get data drom th django template
+            var healthReports = JSON.parse('{{data|escapejs}}');
+
+            if (!Array.isArray(healthReports)) {
+                // Handle error gracefully
+                console.error("Invalid health report data");
+            }
+
+            // extract necessary data for the charts
+            const labels = healthReports.map(report => new Date(report.date).toLocaleDateString());
+            const hbData = healthReports.map(report => report.hb);
+            const sleepTimeData = healthReports.map(report=>report.sleep_time);
+            const weightData = healthReports.map(report=>report.weight);
+
+            // construct the data object for chart.js
+            function createBarChart(canvasId, label, data) {
+            var ctx = document.getElementById(canvasId).getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y:{
+                             beginAtZero: true
+                        }   
+                    }
+                }
+            });
+        }
+
+            // create bar charts
+            createBarChart('hbChart', 'Heart Beat', hbData);
+            createBarChart('weightChart', 'Weight', weightData);
+            createBarChart('sleepChart', 'Sleep Time', sleepTimeData);
+
+        </script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+
+<script>
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Function to handle scroll event
+    function handleScroll() {
+        const content = document.querySelector('.content-container');
+        if (isInViewport(content)) {
+            content.classList.add('visible');
+            // Remove the event listener once the content is visible
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+</script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+</body>
+</html>   

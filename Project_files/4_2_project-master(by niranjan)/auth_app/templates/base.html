@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Care</title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+
+    
+
+
+        
+        .h-20{
+            height: 20rem;
+        }
+        .h-30{
+            height:30rem;
+        }
+
+        body{
+            background-image:url(https://wallpapers-clan.com/wp-content/uploads/2023/09/walk-in-the-fall-forest-minimalist-background.jpg);
+            background-size: cover;
+            background-repeat: repeat;
+            background-position: center;
+        }
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            font-size: 25px;
+        }
+        .rating > span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+        }
+        .rating > span:hover:before,
+        .rating > span:hover ~ span:before {
+            content: "\2605";
+            position: absolute;
+            
+        }
+        .custom-toggler .navbar-toggler-icon {
+            color: red; /* Change color here */
+        }
+        .text-gold{
+            color: gold;
+        }
+
+
+        .navbar-nav .nav-link {
+        transition: padding 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            padding: 8px 20px; /* Change the padding values to whatever you prefer */
+            background-color: rgba(32, 36, 43, 0.2); /* Change the background color to whatever you prefer */
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .health-facts {
+            font-size: 18px;
+            margin-top: 50px;
+            text-align: center;
+            color: #333; /* Darker text color */
+        }
+        .user-request {
+            font-size: 20px;
+            text-align: center;
+            color: #333; /* Darker text color */
+            margin-top: 50px;
+        }
+        .rating-explanation {
+            font-size: 16px;
+            text-align: center;
+            color: #333; /* Darker text color */
+            margin-top: 50px;
+        }
+        
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    
+
+
+    
+    
+    
+   
+
+
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0, 0, 0, 0.2) 100%); padding: 5px 10px;">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand h1 text-white" style="font-size: 18px;">Health Care</a>
+            
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="color: white;"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav" style="font-size: 14px;">
+                    <li class="nav-item">
+                        <a href="/admin/login/" class="nav-link text-white">Admin Panel</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'patient_app:dashboard' %}" class="nav-link text-white">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'patient_app:data_entry' %}" class="nav-link text-white">Health Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:logout' %}" class="nav-link text-white">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:registration' %}" class="nav-link text-white">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:login' %}" class="nav-link text-white">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    {% if user.is_authenticated %}
+    <div class="container text-white">
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col">
+                <h1 class="text-center" style="font-size: 50px;font-style: oblique; border-radius: 50px;background-position: bottom; background-image: url(https://thumbs.dreamstime.com/b/faded-landscape-wild-bear-landscape-illustration-faded-landscape-tall-trees-wild-bear-passing-ai-297495204.jpg); color: #000;  ;"><br><br><br>Welcome,<br><b>{{ user.name }}</b></h1>
+   
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+
+
+
+
+    <div class="container text-white">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-8">
+                <div class="health-facts">
+                    <h2><br><br><br>&#10147;        Why Health Care and Health Monitoring are Important?</h2>
+                    <p>Healthcare is crucial for maintaining overall well-being and preventing diseases. Regular health monitoring helps in early detection of health issues and allows for timely intervention.</p>
+                    <p><b>Here are some facts:</b></p>
+                    <ul>
+                        <li>Regular exercise and a balanced diet can reduce the risk of chronic diseases like heart disease, diabetes, and obesity.</li>
+                        <li>Monitoring vital signs such as blood pressure, heart rate, and cholesterol levels can help in the prevention and management of cardiovascular diseases.</li>
+                        <li>Sleep is essential for cognitive function, mood regulation, and overall health. Poor sleep quality can increase the risk of various health problems.</li>
+                    </ul>
+                </div>
+                
+                <div class="user-request">
+                    <h2>Your Health Data is Important!</h2>
+                    <p>We encourage you to enter your health data regularly. This information helps us track your health status and provide personalized insights and recommendations.</p>
+                    <p>Please enter data for the following metrics:</p>
+                    
+                </div>
+                
+
+
+
+
+
+
+
+
+
+
+
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    {% block body %}{% endblock %}
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+</body>
+</html>

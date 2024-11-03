@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Care</title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .h-20{
+            height: 20rem;
+        }
+        .h-30{
+            height:30rem;
+        }
+
+        body{
+            background-image:url(https://wallpapercave.com/wp/wp9764093.jpg);
+            background-size: cover;
+            background-repeat: repeat;
+            background-position: top;
+        }
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            font-size: 25px;
+        }
+        .rating > span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+        }
+        
+        .custom-toggler .navbar-toggler-icon {
+            color: red; /* Change color here */
+        }
+        .text-gold{
+            color: gold;
+        }
+
+
+        .navbar-nav .nav-link {
+        transition: padding 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            padding: 8px 20px; /* Change the padding values to whatever you prefer */
+            background-color: rgba(32, 36, 43, 0.2); /* Change the background color to whatever you prefer */
+        }
+        
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    
+
+
+    
+    
+    
+   
+
+
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%,rgba(0, 0, 0, 0.2) 100%); padding: 5px 10px;">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand h1 text-white" style="font-size: 18px;">Health Care</a>
+            
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="color: white;"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav" style="font-size: 14px;">
+                    <li class="nav-item">
+                        <a href="/admin/login/" class="nav-link text-white">Admin Panel</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'patient_app:dashboard' %}" class="nav-link text-white">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'patient_app:data_entry' %}" class="nav-link text-white">Health Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:logout' %}" class="nav-link text-white">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:registration' %}" class="nav-link text-white">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'auth_app:login' %}" class="nav-link text-white">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+  
+   
+
+
+
+    <div class="container-fluid" ;>
+        <div class="row justify-content-center h-30 align-items-center">
+            {% if user.is_authenticated %}
+                <div class="col h4">You have already logged in.</div>
+            {% else %}
+                <div class="col-md-4">
+                    <form method="post" style="background-color: none; padding: 20px; border-radius: 30px; border-color: aqua;">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend class="text-white" style="text-align: center; font-size: 50px; font-family:Georgia, 'Times New Roman', Times, serif;">Login<br></legend>
+                            {% if error %}
+                                {{ error }}
+                            {% endif %}
+                            {% if form.username.errors %}
+                                {{ form.username.errors }}
+                            {% endif %}
+                            <div class="mb-3">
+                                
+                                <input type="text" id="id_username" placeholder="Enter username" name="username" class="form-control" style="border-radius: 50px; opacity: 80%;">
+                            </div>
+                            {% if form.password.errors %}
+                                {{ form.password.errors }}
+                            {% endif %}
+                            <div class="mb-3">
+                               
+                                <input type="password" id="id_pwd" placeholder="Enter password" name="password" class="form-control" style="border-radius: 50px; opacity: 80%;">
+                            </div>
+                        </fieldset>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success" style="border-radius: 50px; background-color: rgb(68, 117, 173); padding-inline: 50px;">Login</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+</body>
+</html>
+
+
